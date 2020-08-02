@@ -105,6 +105,29 @@ color: #E0B612;
     margin-top: 10px;
 }
 
-#pin-match , #pin-mismatch{
+/* extra css */
+#pin-display:read-only , #lock-display:read-only{
+    background-color: #f3eded6b;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+    font-size: larger;
+    font-weight: bolder;
+}
+#pin-match , #pin-mismatch, #pin-nul{
     display: none;
+}
+#lock-display , #pin-display{
+    text-align: center;
+}
+.secret{
+    padding: 300px 0px;
+    text-align: center;;
+}
+.secret h1{
+    font-size: 40px;
+    padding: 50px 20px;
+    background-color: black;
+    color: rgba(255, 255, 255, 0.877);
+    box-shadow: 2px 2px 30px lightgray;
+    border-radius: 30px;
 }
