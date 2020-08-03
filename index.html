@@ -87,31 +87,29 @@
         function clickDialPad(number){
             let numberInput = document.getElementById('dialPad-' + number);
             if(number == 'dlt'){
-                let display = document.getElementById('lock-display');
-                let back = display.value.slice(0, -1);
-                display.value = back;
+                let back = lockDisplay.value.slice(0, -1);
+                lockDisplay.value = back;
             }
             else if(number == 'clear'){
-                document.getElementById('lock-display').value = "";
+                lockDisplay.value = "";
             }
             else{
                 let num = numberInput.innerText;
-                let lockDisplay = document.getElementById('lock-display');
                 lockDisplay.value += num;
             }    
         }
 
         // submition & matching
         submitBtn.addEventListener('click',function(){
-            let pinDisplay = document.getElementById('pin-display');
-            let lockDisplay = document.getElementById('lock-display');
-        
             if (lockDisplay.value == ""){
                 displayCaution('nul', 'match', 'mismatch', true);
-                tryLeft()
+                tryLeft();
+
         }
             else if(lockDisplay.value == pinDisplay.value){
                 displayCaution('match', 'mismatch', 'nul', true);
+                lockDisplay.value = "";
+                pinDisplay.value = "";
                 setTimeout(function(){
                     window.location.href = "secretDoor.html";
                 }, 1000);
@@ -119,7 +117,8 @@
             }
             else{
                 displayCaution('mismatch', 'match', 'nul', true);
-                tryLeft()
+                lockDisplay.value = "";
+                tryLeft();
             }
         })
 
