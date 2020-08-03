@@ -58,16 +58,29 @@
 
     <!-- *** JavaScript starts *** -->
     <script>
-        document.getElementById("pin-display").readOnly = true;
-        document.getElementById("lock-display").readOnly = true;
+        // Extra function
+        let pinDisplay = document.getElementById("pin-display");
+        pinDisplay.readOnly = true;
+        let lockDisplay = document.getElementById("lock-display");
+        lockDisplay.readOnly = true;
+        let submitBtn = document.getElementById('submit');
+        submitBtn.style.backgroundColor = "#b92f2f";
+        submitBtn.disabled = true;
 
         // pin- generating
         document.getElementById('generate-btn').addEventListener('click', function(){
+
+            submitBtn.style.backgroundColor = "#495BC3";
+            submitBtn.disabled = false;
+
             let pinDigits = Math.random()*10000;
             let pinNumber = Math.round(pinDigits);
             if(pinNumber>1000){
-                document.getElementById('pin-display').value = pinNumber;
-            }  
+                pinDisplay.value = pinNumber;
+            }
+            if(pinDisplay.value == lockDisplay.value){
+                submitBtn.style.backgroundColor = "green";
+            }
         })
 
         // displaying number to locker.
@@ -88,17 +101,16 @@
             }    
         }
 
-
         // submition & matching
-        document.getElementById('submit').addEventListener('click',function(){
-            let pinNumber = document.getElementById('pin-display');
-            let lockNumber = document.getElementById('lock-display');
+        submitBtn.addEventListener('click',function(){
+            let pinDisplay = document.getElementById('pin-display');
+            let lockDisplay = document.getElementById('lock-display');
         
-            if (lockNumber.value == ""){
+            if (lockDisplay.value == ""){
                 displayCaution('nul', 'match', 'mismatch', true);
                 tryLeft()
         }
-            else if(lockNumber.value == pinNumber.value){
+            else if(lockDisplay.value == pinDisplay.value){
                 displayCaution('match', 'mismatch', 'nul', true);
                 setTimeout(function(){
                     window.location.href = "secretDoor.html";
@@ -111,7 +123,6 @@
             }
         })
 
-        
         function displayCaution(fst,scnd,thrd, displayBlock){
             if(displayBlock = true){
             document.getElementById('pin-' + fst).style.display = 'block';
@@ -127,7 +138,7 @@
                 document.getElementById('alert-left').innerHTML = alertLeft;
             }
             else{
-                document.getElementById('submit').disabled = 'true';
+                submitBtn.disabled = 'true';
                 document.getElementById('alert').style.display = 'none';
                 alert("চোরে সব চুরি কইরা নিয়া গেলো গো... 😱");
                 document.getElementById('submit').style.backgroundColor = 'black'
