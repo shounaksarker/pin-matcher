@@ -28,6 +28,9 @@ body {
     font-size: 20px;
     text-align: center;
 }
+.generate-btn:hover{
+    background-color: #5469e2;
+}
 .generate-btn:focus{
     outline: none;
     box-shadow: none;
