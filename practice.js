@@ -33,7 +33,7 @@ document.getElementById('dialPad-clear').addEventListener('click',function(){
 
 
 function clickNumber(num){
-   document.getElementById('dialPad-'+num).addEventListener('click',function(){
+   document.getElementById('dialPad-' + num).addEventListener('click',function(){
       clickDialPad(num);
    })
 }
@@ -87,9 +87,8 @@ function clickDialPad(number){
  }
  
  function tryLeft(){
-   let alertDigit = document.getElementById('alert-left').innerHTML;
-   let alertInt = parseInt(alertDigit);
-   let alertLeft = alertInt - 1;
+   let alertDigit = parseInt(document.getElementById('alert-left').innerHTML);
+   let alertLeft = alertDigit - 1;
    if( alertLeft > 0){
       document.getElementById('alert-left').innerHTML = alertLeft;
    }
@@ -98,9 +97,7 @@ function clickDialPad(number){
       document.getElementById('alert').style.display = 'none';
       alert("চোরে সব চুরি কইরা নিয়া গেলো গো... 😱");
       document.getElementById('submit').style.backgroundColor = 'black'
-   }
-
-   
+   } 
  }
        
 

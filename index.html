@@ -22,24 +22,24 @@
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div id="dialPad-7" class="button">7</div>
-                              <div id="dialPad-8" class="button">8</div>
-                              <div id="dialPad-9" class="button">9</div>
+                              <div onclick="clickDialPad(7)" id="dialPad-7" class="button">7</div>
+                              <div onclick="clickDialPad(8)" id="dialPad-8" class="button">8</div>
+                              <div onclick="clickDialPad(9)" id="dialPad-9" class="button">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div id="dialPad-4" class="button">4</div>
-                              <div id="dialPad-5" class="button">5</div>
-                              <div id="dialPad-6" class="button">6</div>
+                              <div onclick="clickDialPad(4)" id="dialPad-4" class="button">4</div>
+                              <div onclick="clickDialPad(5)" id="dialPad-5" class="button">5</div>
+                              <div onclick="clickDialPad(6)" id="dialPad-6" class="button">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div id="dialPad-1" class="button">1</div>
-                              <div id="dialPad-2" class="button">2</div>
-                              <div id="dialPad-3" class="button">3</div>
+                              <div onclick="clickDialPad(1)" id="dialPad-1" class="button">1</div>
+                              <div onclick="clickDialPad(2)" id="dialPad-2" class="button">2</div>
+                              <div onclick="clickDialPad(3)" id="dialPad-3" class="button">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div id="dialPad-backspace" class="button"><</div>
-                                <div id="dialPad-0" class="button">0</div>
-                                <div id="dialPad-clear" class="button">C</div>
+                                <div onclick="clickDialPad('dlt')" id="dialPad-backspace" class="button"><</div>
+                                <div onclick="clickDialPad(0)" id="dialPad-0" class="button">0</div>
+                                <div onclick="clickDialPad('clear')" id="dialPad-clear" class="button">C</div>
                             </div>
                             <div>
                                 <button type="submit" id="submit"class="submit-btn">Submit</button>
@@ -56,7 +56,83 @@
         </div>
     </div>
 
+    <!-- *** JavaScript starts *** -->
+    <script>
+        document.getElementById("pin-display").readOnly = true;
+        document.getElementById("lock-display").readOnly = true;
 
-    <script src="function.js"></script>
+        // pin- generating
+        document.getElementById('generate-btn').addEventListener('click', function(){
+            let pinDigits = Math.random()*10000;
+            let pinNumber = Math.round(pinDigits);
+            if(pinNumber>1000){
+                document.getElementById('pin-display').value = pinNumber;
+            }  
+        })
+
+        // displaying number to locker.
+        function clickDialPad(number){
+            let numberInput = document.getElementById('dialPad-' + number);
+            if(number == 'dlt'){
+                let display = document.getElementById('lock-display');
+                let back = display.value.slice(0, -1);
+                display.value = back;
+            }
+            else if(number == 'clear'){
+                document.getElementById('lock-display').value = "";
+            }
+            else{
+                let num = numberInput.innerText;
+                let lockDisplay = document.getElementById('lock-display');
+                lockDisplay.value += num;
+            }    
+        }
+
+
+        // submition & matching
+        document.getElementById('submit').addEventListener('click',function(){
+            let pinNumber = document.getElementById('pin-display');
+            let lockNumber = document.getElementById('lock-display');
+        
+            if (lockNumber.value == ""){
+                displayCaution('nul', 'match', 'mismatch', true);
+                tryLeft()
+        }
+            else if(lockNumber.value == pinNumber.value){
+                displayCaution('match', 'mismatch', 'nul', true);
+                setTimeout(function(){
+                    window.location.href = "secretDoor.html";
+                }, 1000);
+                                    
+            }
+            else{
+                displayCaution('mismatch', 'match', 'nul', true);
+                tryLeft()
+            }
+        })
+
+        
+        function displayCaution(fst,scnd,thrd, displayBlock){
+            if(displayBlock = true){
+            document.getElementById('pin-' + fst).style.display = 'block';
+            }
+            document.getElementById('pin-' + scnd).style.display = 'none';
+            document.getElementById('pin-' + thrd).style.display = 'none';
+        }
+        
+        function tryLeft(){
+        let alertDigit = parseInt(document.getElementById('alert-left').innerHTML);
+        let alertLeft = alertDigit - 1;
+            if( alertLeft > 0){
+                document.getElementById('alert-left').innerHTML = alertLeft;
+            }
+            else{
+                document.getElementById('submit').disabled = 'true';
+                document.getElementById('alert').style.display = 'none';
+                alert("চোরে সব চুরি কইরা নিয়া গেলো গো... 😱");
+                document.getElementById('submit').style.backgroundColor = 'black'
+            } 
+        }
+    </script>
 </body>
 </html>

@@ -75,6 +75,7 @@ vertical-align: middle;
 margin-right: -4px;
 border-radius: 10px;
 cursor: pointer;
+box-shadow: 0px 3px #999;
 }
 .blink-me {
 color: #E0B612;
@@ -106,6 +107,20 @@ color: #E0B612;
 }
 
 /* extra css */
+/* .button:hover {background-color: #495bc3} */
+
+.button:active {
+    background-color: #495bc3;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.generate-btn:active {
+    background-color: #495bc3;
+    box-shadow: 0 5px 60px #39458C;
+    transform: translateY(4px);
+}
+
 #pin-display:read-only , #lock-display:read-only{
     background-color: #f3eded6b;
     color: black;
