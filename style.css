@@ -14,6 +14,7 @@ body {
     background: #222436;
     padding: 30px;
     text-align: center;
+    box-shadow: -5px -5px 8px grey;
 }
 .generate-btn{
     margin-top: 140px;
