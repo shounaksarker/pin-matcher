@@ -11,7 +11,7 @@ It's a magical vault. You need to generate PIN and input that by click number fr
 * You have 3 chances. If you input wrong. you'll get alert and submit button will be disable.
 * Remaining chance will show bottom of the number pad.
 
-### Technology and Dependency:
+### Technology :
 * HTML
 * CSS
 * JavaScript
