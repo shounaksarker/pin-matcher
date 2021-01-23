@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
+                            <!-- Pin generator -->
+    
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -16,6 +19,9 @@
                     <button id="generate-btn" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
+            
+                                <!-- Number Pad -->
+            
             <div class="col-md-6">
                 <div class="input-section half-width">
                     <input id="lock-display" class="form-control" type="text">
@@ -49,16 +55,21 @@
                 </div>
             </div>
         </div>
+                
+                        <!-- Alert messages -->
+                
         <div class="notify-section">
             <p id="pin-mismatch" class="notify">❌ Pin Didn't Match, Please try again</p>
             <p id="pin-match" class="notify">✅ Pin Matched... Secret door is opening for you</p>
             <p id="pin-nul" class="notify">&#9851; Pin Number is required...</p>
         </div>
     </div>
+            
 
     <!-- *** JavaScript starts *** -->
     <script>
         // Extra function
+        
         let pinDisplay = document.getElementById("pin-display");
         pinDisplay.readOnly = true;
         let lockDisplay = document.getElementById("lock-display");
@@ -66,10 +77,12 @@
         let submitBtn = document.getElementById('submit');
         submitBtn.style.backgroundColor = "#b92f2f";
         submitBtn.disabled = true;
+        
+        
 
         // pin- generating
+        
         document.getElementById('generate-btn').addEventListener('click', function(){
-
             submitBtn.style.backgroundColor = "#495BC3";
             submitBtn.disabled = false;
 
@@ -82,8 +95,10 @@
                 submitBtn.style.backgroundColor = "green";
             }
         })
+        
 
         // displaying number to locker.
+        
         function clickDialPad(number){
             let numberInput = document.getElementById('dialPad-' + number);
             if(number == 'dlt'){
@@ -98,8 +113,10 @@
                 lockDisplay.value += num;
             }    
         }
+        
 
         // submition & matching
+        
         submitBtn.addEventListener('click',function(){
             if (lockDisplay.value == ""){
                 displayCaution('nul', 'match', 'mismatch', true);
